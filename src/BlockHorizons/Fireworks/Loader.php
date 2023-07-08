@@ -9,9 +9,9 @@ use BlockHorizons\Fireworks\item\Fireworks;
 use pocketmine\data\bedrock\EntityLegacyIds;
 use pocketmine\entity\EntityDataHelper;
 use pocketmine\entity\EntityFactory;
-use pocketmine\item\ItemFactory;
+use pocketmine\item\VanillaItems;
 use pocketmine\item\ItemIdentifier;
-use pocketmine\item\ItemIds;
+use pocketmine\item\ItemTypeIds;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\plugin\PluginBase;
@@ -22,7 +22,7 @@ class Loader extends PluginBase
 
 	public function onEnable(): void
 	{
-		ItemFactory::getInstance()->register(new Fireworks(new ItemIdentifier(ItemIds::FIREWORKS, 0), "Fireworks"), true);
+		VanillaItems::register(new Fireworks(new ItemIdentifier(ItemTypeIds::FIREWORKS, 0), "Fireworks"), true);
 		EntityFactory::getInstance()->register(FireworksRocket::class, static function (World $world, CompoundTag $nbt): FireworksRocket {
 			return new FireworksRocket(EntityDataHelper::parseLocation($nbt, $world), ItemFactory::getInstance()->get(ItemIds::FIREWORKS));
 		}, ["FireworksRocket", EntityIds::FIREWORKS_ROCKET], EntityLegacyIds::FIREWORKS_ROCKET);
